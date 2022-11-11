@@ -1,9 +1,6 @@
 package com.example.fullstackspringbootandreact;
 
-import com.example.fullstackspringbootandreact.domain.Car;
-import com.example.fullstackspringbootandreact.domain.CarRepository;
-import com.example.fullstackspringbootandreact.domain.Owner;
-import com.example.fullstackspringbootandreact.domain.OwnerRepository;
+import com.example.fullstackspringbootandreact.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +17,9 @@ public class FullStackSpringBootAndReactApplication  implements CommandLineRunne
 	private CarRepository carRepository;
 	@Autowired
 	private OwnerRepository ownerRepository;
+
+	@Autowired
+	private UserRepository urepository;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FullStackSpringBootAndReactApplication.class, args);
@@ -45,5 +45,10 @@ public class FullStackSpringBootAndReactApplication  implements CommandLineRunne
 		for (Car car : carRepository.findAll()) {
 			logger.info(car.getBrand() + " " + car.getModel());
 		}
+
+		urepository.save(new User("user",
+				"$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9.f9q0e4bRadue","USER"));
+		urepository.save(new User("admin",
+				"$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW", "ADMIN"));
 	}
 }
