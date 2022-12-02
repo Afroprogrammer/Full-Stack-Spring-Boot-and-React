@@ -10,26 +10,27 @@ import java.util.List;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Owner {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private long ownerid;
     private String firstname, lastname;
-    @JsonIgnore
-    @OneToMany(cascade=CascadeType.ALL, mappedBy="owner")
-    private List<Car> cars;
 
-    public Owner() {
-    }
+    public Owner() {}
 
     public Owner(String firstname, String lastname) {
+        super();
         this.firstname = firstname;
         this.lastname = lastname;
     }
 
-    public List<Car> getCars() {
+    @JsonIgnore
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="owner", orphanRemoval = true )
+    private List<Car> cars;
+
+    public List<Car> getCars()  {
         return cars;
     }
 
-    public void setCars(List<Car> cars) {
+    public void setCars(List<Car> cars)  {
         this.cars = cars;
     }
 

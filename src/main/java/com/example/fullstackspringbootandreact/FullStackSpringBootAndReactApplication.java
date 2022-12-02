@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.Arrays;
 
@@ -45,10 +46,15 @@ public class FullStackSpringBootAndReactApplication  implements CommandLineRunne
 		for (Car car : carRepository.findAll()) {
 			logger.info(car.getBrand() + " " + car.getModel());
 		}
+//
+//		urepository.save(new PrincipalUser("user",
+//				"$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9.f9q0e4bRadue","USER"));
+//		urepository.save(new PrincipalUser("admin",
+//				"$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW", "ADMIN"));
 
-		urepository.save(new User("user",
-				"$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9.f9q0e4bRadue","USER"));
-		urepository.save(new User("admin",
-				"$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW", "ADMIN"));
+		urepository.save(new PrincipalUser("user", new BCryptPasswordEncoder().encode("password"), "USER"));
+		urepository.save(new PrincipalUser("admin", new BCryptPasswordEncoder().encode("password"), "ADMIN"));
+
+
 	}
 }

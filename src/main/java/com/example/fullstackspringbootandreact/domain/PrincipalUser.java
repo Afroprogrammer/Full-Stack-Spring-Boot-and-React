@@ -3,7 +3,7 @@ package com.example.fullstackspringbootandreact.domain;
 import javax.persistence.*;
 
 @Entity
-public class User {
+public class PrincipalUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
@@ -18,10 +18,10 @@ public class User {
     @Column(nullable=false)
     private String role;
 
-    public User() {
+    public PrincipalUser() {
     }
 
-    public User(String username, String password, String role) {
+    public PrincipalUser(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
